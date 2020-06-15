@@ -68,9 +68,31 @@ Person.prototype.toString = function () {
     - STRETCH: A car which runs out of `fuel` while driving can't drive any more distance:
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
-
-function Car() {
-
+let howManyGallons = function(mpg, m){
+  return m/mpg
+}
+let howFar = function(tank, mpg){
+  return mpg*tank
+}
+function Car(model, milesPerGallon) {
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0;
+  this.odometer = 0;
+}
+Car.prototype.fill = function (gallons) {
+  this.tank = this.tank + gallons
+}
+Car.prototype.drive = function(distance){
+  if(distance < howFar(this.tank, this.milesPerGallon)){
+    this.odometer = this.odometer + distance
+    this.tank = this.tank - howManyGallons(this.milesPerGallon, distance)
+  } else {
+    let x = howFar(this.tank, this.milesPerGallon);
+    this.odometer = this.odometer + x
+    this.tank = 0
+    return `I ran out of fuel at ${x} miles!`
+  }
 }
 
 /*
