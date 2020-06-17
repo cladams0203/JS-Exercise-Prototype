@@ -19,7 +19,6 @@ Airplane.prototype.land = function () {
   this.isFlying = false;
 };
 
-
 /*
 // 👇 COMPLETE YOUR WORK BELOW 👇
 // 👇 COMPLETE YOUR WORK BELOW 👇
@@ -46,15 +45,15 @@ function Person(name, age) {
 }
 Person.prototype.eat = function (someFood) {
   if (this.stomach.length < 10) {
-    this.stomach.push(someFood)
+    this.stomach.push(someFood);
   }
-}
+};
 Person.prototype.poop = function () {
   this.stomach = [];
-}
+};
 Person.prototype.toString = function () {
-  return `${this.name}, ${this.age}`
-}
+  return `${this.name}, ${this.age}`;
+};
 /*
   TASK 2
     - Write a Car constructor that initializes `model` and `milesPerGallon` from arguments.
@@ -68,12 +67,12 @@ Person.prototype.toString = function () {
     - STRETCH: A car which runs out of `fuel` while driving can't drive any more distance:
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
-let howManyGallons = function(mpg, m){
-  return m/mpg
-}
-let howFar = function(tank, mpg){
-  return mpg*tank
-}
+let howManyGallons = function (mpg, m) {
+  return m / mpg;
+};
+let howFar = function (tank, mpg) {
+  return mpg * tank;
+};
 function Car(model, milesPerGallon) {
   this.model = model;
   this.milesPerGallon = milesPerGallon;
@@ -81,19 +80,19 @@ function Car(model, milesPerGallon) {
   this.odometer = 0;
 }
 Car.prototype.fill = function (gallons) {
-  this.tank = this.tank + gallons
-}
-Car.prototype.drive = function(distance){
-  if(distance < howFar(this.tank, this.milesPerGallon)){
-    this.odometer = this.odometer + distance
-    this.tank = this.tank - howManyGallons(this.milesPerGallon, distance)
+  this.tank = this.tank + gallons;
+};
+Car.prototype.drive = function (distance) {
+  if (distance < howFar(this.tank, this.milesPerGallon)) {
+    this.odometer = this.odometer + distance;
+    this.tank = this.tank - howManyGallons(this.milesPerGallon, distance);
   } else {
     let x = howFar(this.tank, this.milesPerGallon);
-    this.odometer = this.odometer + x
-    this.tank = 0
-    return `I ran out of fuel at ${x} miles!`
+    this.odometer = this.odometer + x;
+    this.tank = 0;
+    return `I ran out of fuel at ${x} miles!`;
   }
-}
+};
 
 /*
   TASK 3
@@ -102,9 +101,14 @@ Car.prototype.drive = function(distance){
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
-
+function Baby(name, age, favoriteToy) {
+  Person.call(this, name, age);
+  this.favoriteToy = favoriteToy;
 }
+Baby.prototype = Object.create(Person.prototype);
+Baby.prototype.play = function () {
+  return `Playing with ${this.favoriteToy}`;
+};
 
 /* 
   TASK 4
@@ -116,14 +120,21 @@ function Baby() {
   4. 
 */
 
-
 ///////// END OF CHALLENGE /////////
 ///////// END OF CHALLENGE /////////
 ///////// END OF CHALLENGE /////////
-if (typeof exports !== 'undefined') {
-  module.exports = module.exports || {}
-  if (Airplane) { module.exports.Airplane = Airplane }
-  if (Person) { module.exports.Person = Person }
-  if (Car) { module.exports.Car = Car }
-  if (Baby) { module.exports.Baby = Baby }
+if (typeof exports !== "undefined") {
+  module.exports = module.exports || {};
+  if (Airplane) {
+    module.exports.Airplane = Airplane;
+  }
+  if (Person) {
+    module.exports.Person = Person;
+  }
+  if (Car) {
+    module.exports.Car = Car;
+  }
+  if (Baby) {
+    module.exports.Baby = Baby;
+  }
 }
